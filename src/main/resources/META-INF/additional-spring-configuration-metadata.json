@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.r2dbc.initialization-mode",
+      "type": "java.lang.String",
+      "description": "Description for spring.r2dbc.initialization-mode."
+  }
+] }

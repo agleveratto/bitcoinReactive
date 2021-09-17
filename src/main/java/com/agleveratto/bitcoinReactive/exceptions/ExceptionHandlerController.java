@@ -1,0 +1,50 @@
+package com.agleveratto.bitcoinReactive.exceptions;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.support.WebExchangeBindException;
+import reactor.core.publisher.Mono;
+
+@Slf4j
+@ControllerAdvice
+public class ExceptionHandlerController {
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public Mono<ErrorResponse> onResourceFound(ResourceNotFoundException exception) {
+        log.error("No resource found exception occurred: {} ", exception.getMessage());
+
+        ErrorResponse response = new ErrorResponse();
+        response.getErrors().add(
+                new Error(
+                        HttpStatus.NOT_FOUND.value(),
+                        "Resource not found",
+                        exception.getMessage()));
+
+        return Mono.just(response);
+    }
+
+    @ExceptionHandler(WebExchangeBindException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public Mono<ErrorResponse> onValidationException(WebExchangeBindException e) {
+        log.error("Validation exception occurred", e);
+
+        ErrorResponse error = new ErrorResponse();
+        for (ObjectError objectError : e.getAllErrors()) {
+            error.getErrors().add(
+                    new Error(
+                            HttpStatus.BAD_REQUEST.value(),
+                            "Invalid Request",
+                            objectError.getDefaultMessage()));
+        }
+        return Mono.just(error);
+    }
+}
