@@ -14,22 +14,22 @@ Construir un Micro Servicio que haciendo uso del siguiente servicio REST (https:
 2. Conocer el promedio de valor entre dos Timestamps así como la diferencia porcentual entre ese valor promedio y el valor máximo almacenado para toda la serie temporal disponible.
 3. Incorporar un archivo READ.ME que contenga una descripción de la solución propuesta así como instrucciones de ejecución en entorno local.
 
-####Indicaciones
+#### Indicaciones
 - La aplicación deberá estar desarrollada usando Springboot y subida a un repositorio en github con permisos públicos de acceso y clonado
 - La aplicación deberá ser ejecutada en entorno local sin necesidad de dockerización ni de otro software más que java 1.8
 - El uso de frameworks accesorios queda a la elección del candidato
 - La persistencia de información se realizará en una estructura de datos en memoria lo más optimizada posible.
 
-####Puntos extras si
+#### Puntos extras si
 - Se incorpora un conjunto de test unitarios que demuestran la corrección de la solución
 - Se usa WebClient
 
 
 
-####Solución
+#### Solución
 NOTA: dateFormat --> yyyy-mm-ddThh:mm:ss (2021-09-16T13:23:05)
 
-###GET bitcoin price given a date
+### GET bitcoin price given a date
 
 - URL: localhost:8080/v1/api/bitcoin/priceByDate?createdAt=dateFormat
 - HTTP Method: GET
@@ -49,7 +49,7 @@ NOTA: dateFormat --> yyyy-mm-ddThh:mm:ss (2021-09-16T13:23:05)
 ]
 }`
 
-###GET average price and perceptual differential given two dates
+### GET average price and perceptual differential given two dates
 
 - URL: localhost:8080/v1/api/bitcoin/priceBetweenDates?sinceDate=dateFormat&untilDate=dateFormat
 - HTTP Method: GET
@@ -72,7 +72,7 @@ NOTA: dateFormat --> yyyy-mm-ddThh:mm:ss (2021-09-16T13:23:05)
 ]
 }`
 
-####Documentación
+#### Documentación
 
 - Se agrega documentación tanto diagramas de componentes como casos de uso.
 
